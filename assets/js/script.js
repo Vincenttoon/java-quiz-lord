@@ -1,4 +1,4 @@
-const questionArr = [
+const questions = [
     {
         question: "Inside which HTML element do we put the Javascript?",
         choices: {
@@ -106,7 +106,7 @@ const questionArr = [
 let currentQuestionIndex = 0;
 
 // total time (score)
-let time = questions.length * 15;
+let time = questions.length * 5;
 let timerId;
 
 // variables to reference DOM elements
@@ -120,9 +120,14 @@ const feedbackEl = document.getElementById('feedback');
 
 function startQuiz() {
 	// hide start screen
+    const startScreenEl = document.getElementById('start-screen');
+    startScreenEl.setAttribute('class', 'hide');
 	// un-hide questions section
+    questionsEl.removeAttribute('class');
 	// start timer
+    timerId = setInterval(clockTick, 1000);
 	// show starting time
+    timerEl.textContent = time;
 	// get first question
 }
 
@@ -161,5 +166,5 @@ function clockTick() {
 }
 
 // user clicks button to start quiz
-
+startBtn.onclick = startQuiz;
 // user clicks on element containing choices
