@@ -60,7 +60,9 @@ const highBtn = document.getElementById('highscores');
 var initialsEl = document.getElementById('initials');
 const feedbackEl = document.getElementById('feedback');
 const highscores = document.getElementById('high-score-page');
+const appearHsPage = document.getElementById('high-score-page')
 const container = document.getElementById('container');
+var hsShow = document.getElementById('hsShow');
 
 var highscoresArr = []
 
@@ -119,7 +121,7 @@ function questionClick(event) {
 	// check if user guessed wrong
 	if (buttonEl.value !== questions[currentQuestionIndex].answer) {
 		// penalize time
-		time -= 15;
+		time -= 7;
 
 		// show feedback
 		if (time < 0) {
@@ -167,9 +169,10 @@ function quizEnd() {
 	// hide questions section
 	questionsEl.setAttribute('class', 'hide');
 
+    // addition
     highscoresArr = ['finalScoreEl' + 'initialsEl'];
 
-    submitBtn = saveScores
+    submitBtn.onclick = saveScores
 
 }
 
@@ -184,15 +187,39 @@ function clockTick() {
 	}
 }
 
+// addition
 function highscorePage () {
 
     const startScreenEl = document.getElementById('start-screen');
 	startScreenEl.setAttribute('class', 'hide');
+    const 
+
+    highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+    for (let i = 0; i < highscoresArr.length; i++) {
+        var listItem = document.createElement('li');
+        listItem.textContent = highscoresArr[i].initials + " - " + highscoresArr[i].time;
+        hsShow.appendChild(listItem);
+    }
 
 }
 
+// addition
 var saveScores =function() {
-    localStorage.setItem("highscoresArr", JSON.stringify(highscoresArr));
+    var initials = initialsEl.value.trim()
+    
+    highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+    var newScore = {
+        initials,
+        time
+    }
+
+    highscoresArr.push(newScore);
+    
+    localStorage.setItem("highscores", JSON.stringify(highscoresArr));
+
+    window.location.reload(); 
 }
 
 // user clicks button to start quiz
