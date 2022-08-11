@@ -54,14 +54,15 @@ let timerId;
 const questionsEl = document.getElementById('questions');
 const timerEl = document.getElementById('time');
 const choicesEl = document.getElementById('choices');
-const submitBtn = document.getElementById('submit');
+var submitBtn = document.getElementById('submit');
 const startBtn = document.getElementById('start');
-const resetBtn = document.getElementById('reset');
-const initialsEl = document.getElementById('initials');
+const highBtn = document.getElementById('highscores');
+var initialsEl = document.getElementById('initials');
 const feedbackEl = document.getElementById('feedback');
-const highscores = document.getElementById('highscores');
+const highscores = document.getElementById('high-score-page');
+const container = document.getElementById('container');
 
-record = []
+var highscoresArr = []
 
 function startQuiz() {
 	// hide start screen
@@ -160,13 +161,15 @@ function quizEnd() {
 	endScreenEl.removeAttribute('class');
 
 	// show final score
-	const finalScoreEl = document.getElementById('final-score');
+	var finalScoreEl = document.getElementById('final-score');
 	finalScoreEl.textContent = time;
 
 	// hide questions section
 	questionsEl.setAttribute('class', 'hide');
 
-    submitBtn.onclick = saveScores();
+    highscoresArr = ['finalScoreEl' + 'initialsEl'];
+
+    submitBtn = saveScores
 
 }
 
@@ -181,8 +184,15 @@ function clockTick() {
 	}
 }
 
-function saveScores() {
-    localStorage.setItem("time", JSON.stringify(time));
+function highscorePage () {
+
+    const startScreenEl = document.getElementById('start-screen');
+	startScreenEl.setAttribute('class', 'hide');
+
+}
+
+var saveScores =function() {
+    localStorage.setItem("highscoresArr", JSON.stringify(highscoresArr));
 }
 
 // user clicks button to start quiz
@@ -190,3 +200,5 @@ startBtn.onclick = startQuiz;
 
 // user clicks on element containing choices
 choicesEl.onclick = questionClick;
+
+highBtn.onclick = highscorePage;

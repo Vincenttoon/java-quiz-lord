@@ -47,6 +47,12 @@ button:hover {
   background-color: var(--third);
 }
 
+.hsBtn {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
 .choices {
   display: flex;
   justify-content: center;
