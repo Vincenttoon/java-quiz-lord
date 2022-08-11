@@ -6,7 +6,7 @@
 ### Challenge 4
 
 ## Live Deployment Link
-[Code Quiz](***)
+[Code Quiz](https://vincenttoon.github.io/java-quiz-lord/)
 
 ## Instructions for Challenge
 

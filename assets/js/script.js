@@ -174,6 +174,7 @@ function quizEnd() {
     // addition
     highscoresArr = ['finalScoreEl' + 'initialsEl'];
 
+    // saves high score data, returns to home page
     submitBtn.onclick = saveScores
 
 }
@@ -189,17 +190,21 @@ function clockTick() {
 	}
 }
 
-// addition
+// leads to highscore leaderboard
 function highscorePage () {
 
+    // clear home page
     const startScreenEl = document.getElementById('start-screen');
 	startScreenEl.setAttribute('class', 'hide');
 
+    // add's html elements for high score section
     const appearPageEl = document.getElementById('high-score-page');
     appearPageEl.removeAttribute('class');
 
+    // unstrings highscores Arr elements
     highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
+    // for loop to create and display high scores and their contents
     for (let i = 0; i < highscoresArr.length; i++) {
         var listItem = document.createElement('li');
         listItem.textContent = highscoresArr[i].initials + " - " + highscoresArr[i].time;
@@ -208,28 +213,36 @@ function highscorePage () {
 
 }
 
-// addition
+// function to save scores
 var saveScores = function() {
+    // trims initials values to be singular 
     var initials = initialsEl.value.trim()
     
+    // functions to set collect items of different types or empty brackets?
     highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
+    // collects data from specific variables
     var newScore = {
         initials,
         time
     }
 
+    // pushes newScore into empty High Score Array
     highscoresArr.push(newScore);
     
+    // save's to local storage
     localStorage.setItem("highscores", JSON.stringify(highscoresArr));
 
+    // reloads window page back to start page
     window.location.reload(); 
 }
 
+// clear's local storage
 var clearScores = function() {
     localStorage.removeItem("highscores");
 }
 
+// just to send you back to home page
 var returnHome = function() {
     window.location.reload();
 }
@@ -240,8 +253,11 @@ startBtn.onclick = startQuiz;
 // user clicks on element containing choices
 choicesEl.onclick = questionClick;
 
+// user clicks on button to trigger high score page
 highBtn.onclick = highscorePage;
 
+// user clicks on button to return to start page
 homeBtn.onclick = returnHome;
 
+// user clicks on button to reset scores
 clearBtn.onclick = clearScores;
