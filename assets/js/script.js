@@ -1,104 +1,45 @@
+// variable for your questions (array of question objects)
 const questions = [
+	{
+		title: 'Inside which HTML element do we put the Javascript?',
+		choices: [
+			'<js>',
+			'<script>',
+			'<javascript>',
+			"<scripting>",
+		],
+		answer: '<script>',
+	},
+	{
+		title: 'Where is the correct place to insert a JavaScript?',
+		choices: ['In its own <div> section', 'The <body> section', 'The <head> section', 'The <footer> section'],
+		answer: 'The <body> section',
+	},
+	{
+		title: "How do you call a function called 'myFunction'?",
+		choices: ['call function myFunction()', 'call myFunction()', 'var myFunction()', 'myFunction()'],
+		answer: 'myFunction()',
+	},
+	{
+		title: "How do you write 'Hello World' in an alert box?",
+		choices: ["msg('Hello World')", "alertBox('Hello World')", "alert('Hello World')", "msgBox('Hello World')"],
+		answer: "alert('Hello World')",
+	},
     {
-        question: "Inside which HTML element do we put the Javascript?",
-        choices: {
-            a: "A. <js>",
-            b: "B. <script>",
-            c: "C. <javascript>",
-            d: "D. <scripting>"
-        },
-        answer: "b"
-    },
+		title: 'How to write an IF statement in Javascript?',
+		choices: ['if i = 5 then', 'if i = 5', 'if (i == 5)', 'if i == 5 then'],
+		answer: 'if (i == 5)',
+	},
     {
-        question: "Where is the correct place to insert a JavaScript?",
-        choices: {
-            a: "A. In its own <div> section",
-            b: "B. The <body> section",
-            c: "C. The <head> section",
-            d: "D. The <footer> section"
-        },
-        answer: "b"
-    },
+		title: 'How do you declare a Javascript variable?',
+		choices: ['variable carName', 'v carName', 'v function (carName)', 'var carName'],
+		answer: 'var carName',
+	},
     {
-        question: "What is the correct syntax for referring to an external script called 'xxx.js'",
-        choices: {
-            a: "A. <script src='xxx.js'",
-            b: "B. <script name='xxx.js'",
-            c: "C. <script href='xxx.js'",
-            d: "D. <script link='xxx.js'",
-        },
-        answer: "a"
-    },
-    {
-        question: "What is the correct way to write a Javascript Array?",
-        choices: {
-            a: "A. var colors = ['red', 'green', 'blue']",
-            b: "B. var colors = 'red', 'green', 'blue'",
-            c: "C. var colors = (1:'red', 2:'green', 3:'blue')",
-            d: "D. var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')"
-        },
-        answer: "a"
-    },
-    {
-        question: "How do you write 'Hello World' in an alert box?",
-        choices: {
-            a: "A. msg('Hello World')",
-            b: "B. alertBox('Hello World')",
-            c: "C. alert('Hello World')",
-            d: "D. msgBox('Hello World')"
-        },
-        answer: "c"
-    },
-    {
-        question: "How do you create a function in Javascript?",
-        choices: {
-            a: "A. function = myFunction()",
-            b: "B. function:myFunction()",
-            c: "C. Function MyFunction()",
-            d: "D. function myFunction()"
-        },
-        answer: "d"
-    },
-    {
-        question: "How do you call a function called 'myFunction'?",
-        choices: {
-            a: "A. call function myFunction()",
-            b: "B. call myFunction()",
-            c: "C. myFunction()",
-            d: "D. var myFunction()"
-        },
-        answer: "c"
-    },
-    {
-        question: "How to write an IF statement in Javascript?",
-        choices: {
-            a: "A. if i = 5 then",
-            b: "B. if (i == 5)",
-            c: "C. if i = 5",
-            d: "D. if i == 5 then"
-        },
-        answer: "b"
-    },
-    {
-        question: "How can you add a comment in Javascript?",
-        choices: {
-            a: "A. // This is a comment",
-            b: "B. <!-- This is a comment -->",
-            c: "C. 'This is a comment",
-            d: "D. *This is a comment*"
-        },
-        answer: "a"
-    },
-    {
-        question: "How do you declare a Javascript variable?",
-        choices: {
-            a: "A. variable carName",
-            b: "B. v carName",
-            c: "C. v function (carName)",
-            d: "D. var carName"
-        },
-        answer: "d"
-    }
+		title: "What is the correct syntax for referring to an external script called 'xxx.js'",
+		choices: ["<script src='xxx.js'", "<script name='xxx.js'", "<script href='xxx.js'", "<script link='xxx.js'"],
+		answer:"<script src='xxx.js'",
+	},
 ];
 
 // variables to keep track of quiz state
@@ -120,51 +61,121 @@ const feedbackEl = document.getElementById('feedback');
 
 function startQuiz() {
 	// hide start screen
-    const startScreenEl = document.getElementById('start-screen');
-    startScreenEl.setAttribute('class', 'hide');
+	const startScreenEl = document.getElementById('start-screen');
+	startScreenEl.setAttribute('class', 'hide');
+
 	// un-hide questions section
-    questionsEl.removeAttribute('class');
+	questionsEl.removeAttribute('class');
+
 	// start timer
-    timerId = setInterval(clockTick, 1000);
+	timerId = setInterval(clockTick, 1000);
+
 	// show starting time
-    timerEl.textContent = time;
+	timerEl.textContent = time;
+
 	// get first question
+	getQuestion();
 }
 
 function getQuestion() {
 	// get current question object from array
+	let currentQuestion = questions[currentQuestionIndex];
+
 	// update title with current question
+	const titleEl = document.getElementById('question-title');
+	titleEl.textContent = currentQuestion.title;
+
 	// clear out any old question choices
+	choicesEl.innerHTML = '';
+
 	// loop over choices
-	// create new button for each choice
-	// display on the page
+	for (let i = 0; i < currentQuestion.choices.length; i++) {
+		// create new button for each choice
+		let choice = currentQuestion.choices[i];
+		let choiceNode = document.createElement('button');
+		choiceNode.setAttribute('class', 'choice');
+		choiceNode.setAttribute('value', choice);
+
+		choiceNode.textContent = choice;
+
+		// display on the page
+		choicesEl.appendChild(choiceNode);
+	}
 }
 
 function questionClick(event) {
+	let buttonEl = event.target;
+
 	// if the clicked element is not a choice button, do nothing.
+	if (!buttonEl.matches('.choice')) {
+		return;
+	}
+
 	// check if user guessed wrong
-	// penalize time
-	// show feedback
-	// no such thing as negative time....
-	// display new time on page
-	// give user feedback for correct or incorrect guess
+	if (buttonEl.value !== questions[currentQuestionIndex].answer) {
+		// penalize time
+		time -= 15;
+
+		// show feedback
+		if (time < 0) {
+			// no such thing as negative time....
+			time = 0;
+		}
+
+		// display new time on page
+		timerEl.textContent = time;
+
+		feedbackEl.textContent = 'Wrong!';
+	} else {
+		feedbackEl.textContent = 'Correct!';
+	}
+
 	// flash right/wrong feedback on page for half a second
+	feedbackEl.setAttribute('class', 'feedback');
+	setTimeout(function () {
+		feedbackEl.setAttribute('class', 'feedback hide');
+	}, 500);
+
 	// move to next question
+	currentQuestionIndex++;
+
 	// check if we've run out of questions
+	if (time <= 0 || currentQuestionIndex === questions.length) {
+		quizEnd();
+	} else {
+		getQuestion();
+	}
 }
 
 function quizEnd() {
 	// stop timer
+	clearInterval(timerId);
+
 	// show end screen
+	const endScreenEl = document.getElementById('end-screen');
+	endScreenEl.removeAttribute('class');
+
 	// show final score
+	const finalScoreEl = document.getElementById('final-score');
+	finalScoreEl.textContent = time;
+
 	// hide questions section
+	questionsEl.setAttribute('class', 'hide');
 }
 
 function clockTick() {
 	// update time
+	time--;
+	timerEl.textContent = time;
+
 	// check if user ran out of time
+	if (time <= 0) {
+		quizEnd();
+	}
 }
 
 // user clicks button to start quiz
 startBtn.onclick = startQuiz;
+
 // user clicks on element containing choices
+choicesEl.onclick = questionClick;
