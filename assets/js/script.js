@@ -58,6 +58,9 @@ const submitBtn = document.getElementById('submit');
 const startBtn = document.getElementById('start');
 const initialsEl = document.getElementById('initials');
 const feedbackEl = document.getElementById('feedback');
+const highscores = document.getElementById('highscores');
+
+record = []
 
 function startQuiz() {
 	// hide start screen
@@ -161,6 +164,9 @@ function quizEnd() {
 
 	// hide questions section
 	questionsEl.setAttribute('class', 'hide');
+
+    submitBtn.onclick = saveScores();
+
 }
 
 function clockTick() {
@@ -172,6 +178,16 @@ function clockTick() {
 	if (time <= 0) {
 		quizEnd();
 	}
+}
+
+function seeHighScores() {
+
+
+
+}
+
+function saveScores() {
+    localStorage.setItem("time", JSON.stringify(time));
 }
 
 // user clicks button to start quiz
