@@ -56,6 +56,7 @@ const timerEl = document.getElementById('time');
 const choicesEl = document.getElementById('choices');
 const submitBtn = document.getElementById('submit');
 const startBtn = document.getElementById('start');
+const resetBtn = document.getElementById('reset');
 const initialsEl = document.getElementById('initials');
 const feedbackEl = document.getElementById('feedback');
 const highscores = document.getElementById('highscores');
@@ -178,12 +179,6 @@ function clockTick() {
 	if (time <= 0) {
 		quizEnd();
 	}
-}
-
-function seeHighScores() {
-
-
-
 }
 
 function saveScores() {

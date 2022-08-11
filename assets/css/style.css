@@ -1,16 +1,33 @@
+:root {
+  --primary: #feffdf;
+  --secondary: #dde0ab;
+  --third: #97cba9;
+  --fourth: #668BA4;
+}
+
+
 body {
-  font-family: Arial;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 120%;
+  background-color: var(--secondary);
+  color: var(--fourth);
+}
+
+:root {
+  --primary: #feffdf;
+  --secondary: #dde0ab;
+  --third: #97cba9;
+  --fourth: #668BA4;
 }
 
 a {
-  color: #563d7c;
+  color: var(--fourth);
   text-decoration: none;
   transition: color 0.1s;
 }
 
 a:hover {
-  color: #8570a5;
+  color: var(--third);
 }
 
 button {
@@ -18,20 +35,29 @@ button {
   margin: 5px;
   cursor: pointer;
   font-size: 100%;
-  background-color: #563d7c;
+  background-color: var(--fourth);
   border-radius: 5px;
   padding: 2px 10px;
-  color: white;
+  color: var(--primary);
   border: 0;
   transition: background-color 0.1s;
 }
 
 button:hover {
-  background-color: #8570a5;
+  background-color: var(--third);
 }
 
+.choices {
+  display: flex;
+  justify-content: center;
+}
 .choices button {
   display: block;
+}
+
+.question-title {
+  display: flex;
+  text-align: center;
 }
 
 input[type="text"] {
@@ -85,4 +111,13 @@ li:nth-child(odd) {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.ending {
+  text-align: center;
+}
+
+.score-text {
+  display: flex;
+  justify-content: center;
 }
