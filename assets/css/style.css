@@ -121,3 +121,10 @@ li:nth-child(odd) {
   display: flex;
   justify-content: center;
 }
+
+input[type=text] {
+  border: none;
+  border-bottom: 3px solid rgb(102, 139, 164);
+  background-color: var(--primary);
+  color: var(--fourth);
+}
