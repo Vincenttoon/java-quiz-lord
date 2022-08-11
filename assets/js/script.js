@@ -57,6 +57,8 @@ const choicesEl = document.getElementById('choices');
 var submitBtn = document.getElementById('submit');
 const startBtn = document.getElementById('start');
 const highBtn = document.getElementById('highscores');
+const homeBtn = document.getElementById('home-btn');
+const clearBtn = document.getElementById('clear-btn');
 var initialsEl = document.getElementById('initials');
 const feedbackEl = document.getElementById('feedback');
 const highscores = document.getElementById('high-score-page');
@@ -121,7 +123,7 @@ function questionClick(event) {
 	// check if user guessed wrong
 	if (buttonEl.value !== questions[currentQuestionIndex].answer) {
 		// penalize time
-		time -= 7;
+		time -= 8;
 
 		// show feedback
 		if (time < 0) {
@@ -192,7 +194,9 @@ function highscorePage () {
 
     const startScreenEl = document.getElementById('start-screen');
 	startScreenEl.setAttribute('class', 'hide');
-    const 
+
+    const appearPageEl = document.getElementById('high-score-page');
+    appearPageEl.removeAttribute('class');
 
     highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
@@ -205,7 +209,7 @@ function highscorePage () {
 }
 
 // addition
-var saveScores =function() {
+var saveScores = function() {
     var initials = initialsEl.value.trim()
     
     highscoresArr = JSON.parse(window.localStorage.getItem("highscores")) || [];
@@ -222,6 +226,14 @@ var saveScores =function() {
     window.location.reload(); 
 }
 
+var clearScores = function() {
+    localStorage.removeItem("highscores");
+}
+
+var returnHome = function() {
+    window.location.reload();
+}
+
 // user clicks button to start quiz
 startBtn.onclick = startQuiz;
 
@@ -229,3 +241,7 @@ startBtn.onclick = startQuiz;
 choicesEl.onclick = questionClick;
 
 highBtn.onclick = highscorePage;
+
+homeBtn.onclick = returnHome;
+
+clearBtn.onclick = clearScores;

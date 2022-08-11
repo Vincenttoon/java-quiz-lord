@@ -61,6 +61,10 @@ button:hover {
   display: block;
 }
 
+.hs-btn-cont {
+  display: flex;
+  justify-content: center;
+}
 .question-title {
   display: flex;
   text-align: center;
